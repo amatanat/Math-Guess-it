@@ -5,13 +5,17 @@
             app:startDestination="@id/titleFragment">
 
     <fragment android:id="@+id/titleFragment" android:name="de.ma.mathguessit.screens.title.TitleFragment"
-              android:label="fragment_title" tools:layout="@layout/fragment_title">
+              android:label="Math - Guess it" tools:layout="@layout/fragment_title">
         <action android:id="@+id/action_title_to_game" app:destination="@id/gameFragment"/>
     </fragment>
-    <fragment android:id="@+id/gameFragment" android:name="de.ma.mathguessit.screens.game.GameFragment" android:label="fragment_game"
+    <fragment android:id="@+id/gameFragment" android:name="de.ma.mathguessit.screens.game.GameFragment"
+              android:label="Game"
               tools:layout="@layout/fragment_game">
         <action android:id="@+id/action_game_to_score" app:destination="@id/scoreFragment"/>
     </fragment>
     <fragment android:id="@+id/scoreFragment" android:name="de.ma.mathguessit.screens.score.ScoreFragment"
-              android:label="fragment_score" tools:layout="@layout/fragment_score"/>
+              android:label="Final score" tools:layout="@layout/fragment_score">
+        <action android:id="@+id/action_scoreFragment_to_titleFragment" app:destination="@id/titleFragment"
+                app:popUpTo="@+id/titleFragment"/>
+    </fragment>
 </navigation>
