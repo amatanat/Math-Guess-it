@@ -1,4 +1,4 @@
-package de.ma.mathguessit
+package de.ma.mathguessit.screens.game
 
 
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import de.ma.mathguessit.R
 
 class GameFragment : Fragment() {
 
