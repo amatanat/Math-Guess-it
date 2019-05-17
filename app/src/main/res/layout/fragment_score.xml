@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".screens.score.ScoreFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
-
-</FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+    >
+        <TextView
+                style="@style/TextStyle"
+                android:id="@+id/total_score_tv"
+                android:layout_gravity="center_horizontal"/>
+        <Button
+                android:text="@string/play_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/play_again_btn"
+                android:layout_gravity="center_horizontal" android:background="@android:color/holo_green_light"
+                android:textColor="@android:color/background_light"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" android:padding="@dimen/padding_8"/>
+    </LinearLayout>
 </layout>
