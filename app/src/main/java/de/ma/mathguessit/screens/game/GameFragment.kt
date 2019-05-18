@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import de.ma.mathguessit.R
 import de.ma.mathguessit.databinding.FragmentGameBinding
+import timber.log.Timber
 
 class GameFragment : Fragment() {
 
@@ -24,7 +25,7 @@ class GameFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
-
+        Timber.i("onCreate is called")
         resetList()
         nextTask()
 
@@ -43,7 +44,7 @@ class GameFragment : Fragment() {
 
 
     private fun nextTask() {
-        if (taskList.size > 0){
+        if (taskList.isEmpty()){
             finished()
         } else{
             task = taskList.removeAt(0)

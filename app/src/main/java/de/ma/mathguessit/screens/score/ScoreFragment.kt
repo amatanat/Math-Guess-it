@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import de.ma.mathguessit.R
 import de.ma.mathguessit.databinding.FragmentScoreBinding
+import timber.log.Timber
 
 class ScoreFragment : Fragment() {
 
@@ -23,6 +24,7 @@ class ScoreFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score, container, false)
+        Timber.i("onCreate is called")
         binding.playAgainBtn.setOnClickListener {
             findNavController().navigate(R.id.action_score_to_game)
         }
