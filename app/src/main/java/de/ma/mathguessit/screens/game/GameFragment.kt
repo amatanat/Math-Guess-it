@@ -36,6 +36,15 @@ class GameFragment : Fragment() {
             binding.mathGuessTv.text = newTask
         })
 
+        gameViewModel.eventGameFinished.observe(this, Observer { hasFinished ->
+            if(hasFinished){
+                val currentScore = gameViewModel.score.value ?: 0
+                val directions = GameFragmentDirections.actionGameToScore(currentScore)
+                findNavController().navigate(directions)
+                gameViewModel.onGameFinishedComplete()
+            }
+        })
+
 
         binding.nextBtn.setOnClickListener {
             gameViewModel.onCorrect()
@@ -47,13 +56,4 @@ class GameFragment : Fragment() {
 
         return binding.root
     }
-
-
-    private fun finished() {
-        val currentScore = gameViewModel.score.value ?: 0
-        val directions = GameFragmentDirections.actionGameToScore(currentScore)
-        findNavController().navigate(directions)
-    }
-
-
 }

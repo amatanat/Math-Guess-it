@@ -17,9 +17,13 @@ class GameViewModel: ViewModel() {
 
     lateinit var taskList: MutableList<String>
 
+    private var _eventGameFinished = MutableLiveData<Boolean>()
+    val eventGameFinished: LiveData<Boolean>
+        get() = _eventGameFinished
 
     init {
         Timber.i("onCreate is called")
+        _eventGameFinished.value = false
         _score.value = 0
         resetList()
         nextTask()
@@ -50,7 +54,7 @@ class GameViewModel: ViewModel() {
 
     private fun nextTask() {
         if (taskList.isEmpty()){
-           // finished()
+           _eventGameFinished.value = true
         } else{
             _task.value = taskList.removeAt(0)
         }
@@ -64,5 +68,9 @@ class GameViewModel: ViewModel() {
     fun onSkip(){
         _score.value = (score.value)?.minus(1)
         nextTask()
+    }
+
+    fun onGameFinishedComplete(){
+        _eventGameFinished.value = false
     }
 }
