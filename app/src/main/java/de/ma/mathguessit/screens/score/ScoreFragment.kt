@@ -29,7 +29,7 @@ class ScoreFragment : Fragment() {
             findNavController().navigate(R.id.action_score_to_game)
         }
 
-        val score = getString(R.string.total_score) + args.score
+        val score = getString(R.string.total_score) + " ${args.score}"
         binding.totalScoreTv.text = score
 
         binding.playAgainBtn.setOnClickListener {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import de.ma.mathguessit.R
 import de.ma.mathguessit.databinding.FragmentGameBinding
@@ -15,6 +16,7 @@ import timber.log.Timber
 class GameFragment : Fragment() {
 
     private lateinit var binding: FragmentGameBinding
+    private lateinit var gameViewModel: GameViewModel
     private var score = 0
     private var task = ""
     private lateinit var taskList: MutableList<String>
@@ -25,7 +27,8 @@ class GameFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
-        Timber.i("onCreate is called")
+        Timber.i("onCreateView is called")
+        gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
         resetList()
         nextTask()
 
