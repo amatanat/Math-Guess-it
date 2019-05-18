@@ -1,17 +1,19 @@
 package de.ma.mathguessit.screens.game
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
 
 class GameViewModel: ViewModel() {
 
-    var score = 0
-    var task = ""
+    var score = MutableLiveData<Int>()
+    var task = MutableLiveData<String>()
     lateinit var taskList: MutableList<String>
 
 
     init {
         Timber.i("onCreate is called")
+        score.value = 0
         resetList()
         nextTask()
     }
@@ -43,17 +45,17 @@ class GameViewModel: ViewModel() {
         if (taskList.isEmpty()){
            // finished()
         } else{
-            task = taskList.removeAt(0)
+            task.value = taskList.removeAt(0)
         }
     }
 
     fun onCorrect(){
-        score++
+        score.value = (score.value)?.plus(1)
         nextTask()
     }
 
     fun onSkip(){
-        score--
+        score.value = (score.value)?.minus(1)
         nextTask()
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import de.ma.mathguessit.R
@@ -27,35 +28,31 @@ class GameFragment : Fragment() {
         Timber.i("onCreateView is called")
         gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
-        updateScoreText()
-        updateTaskText()
+
+        gameViewModel.score.observe(this, Observer { newScore ->
+            binding.scoreCountTv.text = newScore.toString()
+        })
+
+        gameViewModel.task.observe(this, Observer { newTask ->
+            binding.mathGuessTv.text = newTask
+        })
+
 
         binding.nextBtn.setOnClickListener {
             gameViewModel.onCorrect()
-            updateScoreText()
-            updateTaskText()
         }
 
         binding.skipBtn.setOnClickListener {
             gameViewModel.onSkip()
-            updateScoreText()
-            updateTaskText()
         }
 
         return binding.root
     }
 
 
-    private fun updateScoreText() {
-        binding.scoreCountTv.text = gameViewModel.score.toString()
-    }
-
-    private fun updateTaskText() {
-        binding.mathGuessTv.text = gameViewModel.task
-    }
-
     private fun finished() {
-        val directions = GameFragmentDirections.actionGameToScore(gameViewModel.score)
+        val currentScore = gameViewModel.score.value ?: 0
+        val directions = GameFragmentDirections.actionGameToScore(currentScore)
         findNavController().navigate(directions)
     }
 
