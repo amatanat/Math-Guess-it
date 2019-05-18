@@ -17,9 +17,6 @@ class GameFragment : Fragment() {
 
     private lateinit var binding: FragmentGameBinding
     private lateinit var gameViewModel: GameViewModel
-    private var score = 0
-    private var task = ""
-    private lateinit var taskList: MutableList<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,60 +26,38 @@ class GameFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
         Timber.i("onCreateView is called")
         gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
-        resetList()
-        nextTask()
+
+        updateScoreText()
+        updateTaskText()
 
         binding.nextBtn.setOnClickListener {
-            score++
-            nextTask()
+            gameViewModel.onCorrect()
+            updateScoreText()
+            updateTaskText()
         }
 
         binding.skipBtn.setOnClickListener {
-            score--
-            nextTask()
+            gameViewModel.onSkip()
+            updateScoreText()
+            updateTaskText()
         }
 
         return binding.root
     }
 
 
-    private fun nextTask() {
-        if (taskList.isEmpty()){
-            finished()
-        } else{
-            task = taskList.removeAt(0)
-        }
-        updateTaskText()
-        updateScoreText()
-    }
-
     private fun updateScoreText() {
-        binding.scoreCountTv.text = score.toString()
+        binding.scoreCountTv.text = gameViewModel.score.toString()
     }
 
     private fun updateTaskText() {
-        binding.mathGuessTv.text = task
+        binding.mathGuessTv.text = gameViewModel.task
     }
 
     private fun finished() {
-        val directions = GameFragmentDirections.actionGameToScore(score)
+        val directions = GameFragmentDirections.actionGameToScore(gameViewModel.score)
         findNavController().navigate(directions)
     }
 
-    private fun resetList() {
-        taskList = mutableListOf(
-            "3x4",
-            "4x5",
-            "5x6",
-            "6x7",
-            "11x11",
-            "11x12",
-            "14x14",
-            "16x16",
-            "21x21",
-            "31x34",
-            "2x11"
-        )
-        taskList.shuffle()
-    }
+
 }

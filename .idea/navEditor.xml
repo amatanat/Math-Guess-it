@@ -40,7 +40,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_scoreFragment_to_titleFragment">
+                            <entry key="action_score_to_game">
                               <value>
                                 <LayoutPositions />
                               </value>
