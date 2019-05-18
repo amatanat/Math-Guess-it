@@ -28,7 +28,6 @@ class GameFragment : Fragment() {
         Timber.i("onCreateView is called")
         gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
-
         gameViewModel.score.observe(this, Observer { newScore ->
             binding.scoreCountTv.text = newScore.toString()
         })
