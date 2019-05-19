@@ -4,7 +4,7 @@ The purpose of this app is to display:
 * data passing between UI controllers using SafeArgs, 
 * ViewModel implementation for the UI controller,
 * UI controller communication with the ViewModel,
-* Data binding usage
+* Data binding usage,
 * Data binding and ViewModel direct communication.
 * Furthermore, how to make data binding lifecycle aware and bind xml layouts to LiveData objects. 
 
