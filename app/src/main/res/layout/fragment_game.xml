@@ -75,6 +75,7 @@
         <TextView
                 style="@style/TextStyle"
                 android:id="@+id/timer_tv"
+                android:text="@{gameViewModel.currentTimeString}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/score_tv"
