@@ -29,6 +29,8 @@ class GameFragment : Fragment() {
         Timber.i("onCreateView is called")
         gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
+        binding.gameViewModel = gameViewModel
+
         gameViewModel.score.observe(this, Observer { newScore ->
             binding.scoreCountTv.text = newScore.toString()
         })
@@ -49,15 +51,6 @@ class GameFragment : Fragment() {
         gameViewModel.currentTime.observe(this, Observer { newTime ->
             binding.timerTv.text = DateUtils.formatElapsedTime(newTime)
         })
-
-
-        binding.nextBtn.setOnClickListener {
-            gameViewModel.onCorrect()
-        }
-
-        binding.skipBtn.setOnClickListener {
-            gameViewModel.onSkip()
-        }
 
         return binding.root
     }
