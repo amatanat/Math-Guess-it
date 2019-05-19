@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+>
+    <data>
+        <variable name="scoreViewModel" type="de.ma.mathguessit.screens.score.ScoreViewModel"/>
+
+    </data>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -16,8 +21,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/play_again_btn"
+                android:onClick="@{() -> scoreViewModel.playAgain()}"
                 android:layout_gravity="center_horizontal" android:background="@android:color/holo_green_light"
                 android:textColor="@android:color/background_light"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" android:padding="@dimen/padding_8"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:padding="@dimen/padding_8"/>
     </LinearLayout>
 </layout>

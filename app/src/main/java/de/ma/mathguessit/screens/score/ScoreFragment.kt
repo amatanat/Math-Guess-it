@@ -34,14 +34,12 @@ class ScoreFragment : Fragment() {
         scoreViewModelFactory = ScoreViewModelFactory(args.score)
         scoreViewModel = ViewModelProviders.of(this, scoreViewModelFactory).get(ScoreViewModel::class.java)
 
+        binding.scoreViewModel = scoreViewModel
+
         scoreViewModel.score.observe(this, Observer { newScore ->
             val score = getString(R.string.total_score) + " $newScore"
             binding.totalScoreTv.text = score
         })
-
-        binding.playAgainBtn.setOnClickListener {
-            scoreViewModel.playAgain()
-        }
 
         scoreViewModel.eventPlayAgain.observe(this, Observer { playAgain ->
             if (playAgain) {
@@ -49,8 +47,6 @@ class ScoreFragment : Fragment() {
                 scoreViewModel.playAgainComplete()
             }
         })
-
-
 
         return binding.root
     }

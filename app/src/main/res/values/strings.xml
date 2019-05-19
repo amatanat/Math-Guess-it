@@ -7,6 +7,6 @@
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="score">Score</string>
-    <string name="play_again">PLAY AGAIN</string>
+    <string name="play_again">Play again</string>
     <string name="total_score">Total score: </string>
 </resources>
