@@ -1,11 +1,21 @@
 package de.ma.mathguessit.screens.game
 
+import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
 
 class GameViewModel: ViewModel() {
+
+    companion object {
+        // the game is over
+        const val GAME_OVER = 0L
+        // the number of milliseconds in a second
+        const val ONE_SECOND = 1000L
+        // the total time of the game
+        const val COUNTDOWN_TIME = 10000L
+    }
 
     private var _score = MutableLiveData<Int>()
     val score: LiveData<Int>
@@ -21,17 +31,38 @@ class GameViewModel: ViewModel() {
     val eventGameFinished: LiveData<Boolean>
         get() = _eventGameFinished
 
+    private var _currentTime =  MutableLiveData<Long>()
+    val currentTime: LiveData<Long>
+        get() = _currentTime
+
+    private var timer: CountDownTimer
+
     init {
-        Timber.i("onCreate is called")
+        Timber.i("init is called")
         _eventGameFinished.value = false
         _score.value = 0
         resetList()
         nextTask()
+
+        timer = object: CountDownTimer(COUNTDOWN_TIME, ONE_SECOND){
+            override fun onFinish() {
+                _currentTime.value = GAME_OVER
+                _eventGameFinished.value = true
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                _currentTime.value = millisUntilFinished / ONE_SECOND
+            }
+
+        }
+
+        timer.start()
     }
 
     override fun onCleared() {
         super.onCleared()
         Timber.i("onCleared is called")
+        timer.cancel()
     }
 
     private fun resetList() {
@@ -54,10 +85,9 @@ class GameViewModel: ViewModel() {
 
     private fun nextTask() {
         if (taskList.isEmpty()){
-           _eventGameFinished.value = true
-        } else{
-            _task.value = taskList.removeAt(0)
+            resetList()
         }
+        _task.value = taskList.removeAt(0)
     }
 
     fun onCorrect(){

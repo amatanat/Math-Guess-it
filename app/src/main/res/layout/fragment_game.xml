@@ -61,5 +61,12 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 style="@style/TextStyle"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"/>
+        <TextView
+                style="@style/TextStyle"
+                android:id="@+id/timer_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/score_tv"
+                />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
