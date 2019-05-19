@@ -4,6 +4,7 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/play_btn" android:text="@string/play"
-            android:background="@android:color/holo_blue_dark" android:textColor="@android:color/background_light"
-            android:textStyle="bold" android:textSize="24sp" android:layout_gravity="center" android:padding="8dp"/>
+            android:background="@color/colorPrimary" android:textColor="@android:color/background_light"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" android:layout_gravity="center" android:padding="8dp"/>
 </layout>
