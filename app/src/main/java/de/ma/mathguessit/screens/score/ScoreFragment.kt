@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import de.ma.mathguessit.R
@@ -18,23 +20,37 @@ class ScoreFragment : Fragment() {
     private lateinit var binding: FragmentScoreBinding
     private val args: ScoreFragmentArgs by navArgs()
 
+    private lateinit var scoreViewModel: ScoreViewModel
+    private lateinit var scoreViewModelFactory: ScoreViewModelFactory
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score, container, false)
-        Timber.i("onCreate is called")
+        Timber.i("onCreateView is called")
+
+        scoreViewModelFactory = ScoreViewModelFactory(args.score)
+        scoreViewModel = ViewModelProviders.of(this, scoreViewModelFactory).get(ScoreViewModel::class.java)
+
+        scoreViewModel.score.observe(this, Observer { newScore ->
+            val score = getString(R.string.total_score) + " $newScore"
+            binding.totalScoreTv.text = score
+        })
+
         binding.playAgainBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_score_to_game)
+            scoreViewModel.playAgain()
         }
 
-        val score = getString(R.string.total_score) + " ${args.score}"
-        binding.totalScoreTv.text = score
+        scoreViewModel.eventPlayAgain.observe(this, Observer { playAgain ->
+            if (playAgain) {
+                findNavController().navigate(ScoreFragmentDirections.actionScoreToGame())
+                scoreViewModel.playAgainComplete()
+            }
+        })
 
-        binding.playAgainBtn.setOnClickListener {
-            findNavController().navigate(ScoreFragmentDirections.actionScoreToGame())
-        }
+
 
         return binding.root
     }
