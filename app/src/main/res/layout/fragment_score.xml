@@ -10,11 +10,11 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-    >
+            android:layout_gravity="center">
         <TextView
                 style="@style/TextStyle"
                 android:id="@+id/total_score_tv"
+                android:text="@{@string/total_score(scoreViewModel.score)}"
                 android:layout_gravity="center_horizontal"/>
         <Button
                 android:text="@string/play_again"

@@ -67,17 +67,17 @@ class GameViewModel: ViewModel() {
 
     private fun resetList() {
         taskList = mutableListOf(
-            "3x4",
-            "4x5",
-            "5x6",
-            "6x7",
-            "11x11",
-            "11x12",
-            "14x14",
-            "16x16",
-            "21x21",
-            "31x34",
-            "2x11"
+            "3 x 4",
+            "4 x 5",
+            "5 x 6",
+            "6 x 7",
+            "11 x 11",
+            "11 x 12",
+            "14 x 14",
+            "16 x 16",
+            "21 x 21",
+            "31 x 34",
+            "2 x 11"
         )
         taskList.shuffle()
     }

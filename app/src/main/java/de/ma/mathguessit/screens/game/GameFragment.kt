@@ -31,13 +31,7 @@ class GameFragment : Fragment() {
 
         binding.gameViewModel = gameViewModel
 
-        gameViewModel.score.observe(this, Observer { newScore ->
-            binding.scoreCountTv.text = newScore.toString()
-        })
-
-        gameViewModel.task.observe(this, Observer { newTask ->
-            binding.mathGuessTv.text = newTask
-        })
+        binding.lifecycleOwner = this
 
         gameViewModel.eventGameFinished.observe(this, Observer { hasFinished ->
             if(hasFinished){
